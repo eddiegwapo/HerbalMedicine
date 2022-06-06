@@ -1,0 +1,76 @@
+﻿@page
+@model HerbalMedicine.Pages.Medicine.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+<style>
+    td,th{
+         border: 1px solid #336600;
+         }
+         .table tr:nth-child(even){background-color: #f2f2f2;}
+         .table tr:nth-child(odd){background-color: #f2f2f2;}
+
+         .table th{
+             text-align: left;
+             background-color: #336600;
+             color: white;
+         }
+
+</style>
+
+<h1>Herbal Medicines</h1>
+
+<p>
+   
+    <a asp-page="Create"><button class="btn2">Add Medicine</button></a>
+   
+</p>
+<form>
+    <p>
+        <input type="text" placeholder="Search Here" asp-for="SearchString" />
+        <input type="submit" value="🔍" />
+    </p>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Herbal[0].HerbalName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Herbal[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Herbal[0].Validity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Herbal[0].LevelofDevelopment)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Herbal) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.HerbalName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Validity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LevelofDevelopment)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> 
+                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> 
+                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
